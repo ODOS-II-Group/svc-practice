@@ -30,7 +30,4 @@
 		file="config/liquibase/update/2018-07/07-18/20180720_alter_conf_sched-tbl_wube_01.xml"
 		relativeToChangelogFile="false" />
 
-
-
-
 </databaseChangeLog>
