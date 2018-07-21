@@ -112,7 +112,8 @@ public class ConferenceRoomScheduleResourceIntTest extends BaseIntegrationTest {
             .requestorId(DEFAULT_REQUESTOR_ID)
             .roomScheduleStartTime(convertDateString(DEFAULT_ROOM_SCHEDULE_START_TIME, "yyyy-MM-dd HH:mm"))
             .roomScheduleEndTime(convertDateString(DEFAULT_ROOM_SCHEDULE_END_TIME, "yyyy-MM-dd HH:mm"))
-            .conferenceTitle(DEFAULT_CONFERENCE_TITLE);
+            .conferenceTitle(DEFAULT_CONFERENCE_TITLE)
+            .numberOfParticipant(10L);
         
 		Building building = new Building();
 		building.setBuildingDesc("Building One");
@@ -239,6 +240,7 @@ public class ConferenceRoomScheduleResourceIntTest extends BaseIntegrationTest {
             .andExpect(jsonPath("$.[*].requestorId").value(hasItem(DEFAULT_REQUESTOR_ID.toString())))
             .andExpect(jsonPath("$.[*].roomScheduleStartTime").exists())
             .andExpect(jsonPath("$.[*].roomScheduleEndTime").exists())
+            .andExpect(jsonPath("$.[*].numberOfParticipant").exists())
             .andExpect(jsonPath("$.[*].conferenceTitle").value(hasItem(DEFAULT_CONFERENCE_TITLE.toString())));
     }
 
