@@ -48,6 +48,9 @@ public class ConferenceRoomSchedule implements Serializable {
     @Column(name = "conf_title")
     private String conferenceTitle;
     
+    @Column(name = "num_participant")
+    private Long numberOfParticipant;
+    
     @ManyToOne(targetEntity = ConferenceRoom.class,cascade = CascadeType.ALL)
 	@JoinColumn(name = "conf_rm_id")
 	private ConferenceRoom conferenceRoom;
@@ -121,6 +124,15 @@ public class ConferenceRoomSchedule implements Serializable {
 
 	public void setConferenceRoom(ConferenceRoom conferenceRoom) {
 		this.conferenceRoom = conferenceRoom;
+	}
+	
+
+	public Long getNumberOfParticipant() {
+		return numberOfParticipant;
+	}
+
+	public void setNumberOfParticipant(Long numberOfParticipant) {
+		this.numberOfParticipant = numberOfParticipant;
 	}
 
 	@Override
