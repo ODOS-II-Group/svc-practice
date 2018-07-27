@@ -52,11 +52,35 @@ public class ConferenceRoom implements Serializable {
 	@JoinColumn(name = "bldg_id")
 	private Building building;
 	
+//	@ManyToOne(targetEntity = Building.class, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "id")
+//	private RoomEquipmentIssue roomEquipmentIssue;
+	
 	@OneToMany(mappedBy = "conferenceRoom", fetch = FetchType.LAZY ,cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ConferenceRoomSchedule> conferenceRoomSchedule = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "conferenceRoom", fetch = FetchType.LAZY, cascade=CascadeType.ALL, orphanRemoval = true)
 	private List<ConferenceRoomEquipment> conferenceRoomEquipments = new ArrayList<>();
+	
+	public  ConferenceRoom() {}
+	
+	
+
+	public ConferenceRoom(String roomNum, String roomName, Integer roomCapacity, ActiveIndicatorEnum activeIndicator,
+			Building building, RoomEquipmentIssue roomEquipmentIssue,
+			List<ConferenceRoomSchedule> conferenceRoomSchedule,
+			List<ConferenceRoomEquipment> conferenceRoomEquipments) {
+		this.roomNum = roomNum;
+		this.roomName = roomName;
+		this.roomCapacity = roomCapacity;
+		this.activeIndicator = activeIndicator;
+		this.building = building;
+//		this.roomEquipmentIssue = roomEquipmentIssue;
+		this.conferenceRoomSchedule = conferenceRoomSchedule;
+		this.conferenceRoomEquipments = conferenceRoomEquipments;
+	}
+
+
 
 	public Long getConferenceRoomId() {
 		return conferenceRoomId;
@@ -121,6 +145,7 @@ public class ConferenceRoom implements Serializable {
 	public void setConferenceRoomEquipments(List<ConferenceRoomEquipment> conferenceRoomEquipments) {
 		this.conferenceRoomEquipments = conferenceRoomEquipments;
 	}
+
 
 	@Override
 	public boolean equals(Object o) {

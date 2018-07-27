@@ -44,4 +44,6 @@ public interface ConferenceRoomScheduleService {
     void delete(Long id);
     
     List<ConferenceRoomScheduleDTO> findByRequestId(String requestorId);
+    
+    boolean isConfRoomAvaialbe(Long conferenceRoomId, String roomScheduleStartTime);
 }
