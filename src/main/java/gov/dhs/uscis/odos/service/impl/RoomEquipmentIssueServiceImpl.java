@@ -4,11 +4,15 @@ import gov.dhs.uscis.odos.service.RoomEquipmentIssueService;
 import gov.dhs.uscis.odos.domain.ConferenceRoom;
 import gov.dhs.uscis.odos.domain.RoomEquipmentIssue;
 import gov.dhs.uscis.odos.repository.RoomEquipmentIssueRepository;
+
+import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,6 +22,8 @@ import java.util.List;
 @Transactional
 public class RoomEquipmentIssueServiceImpl implements RoomEquipmentIssueService {
 
+	
+	private static final String DATE_FORMAT  = "yyyy-MM-dd HH:mm";
     private final Logger log = LoggerFactory.getLogger(RoomEquipmentIssueServiceImpl.class);
 
     private final RoomEquipmentIssueRepository roomEquipmentIssueRepository;
@@ -36,8 +42,21 @@ public class RoomEquipmentIssueServiceImpl implements RoomEquipmentIssueService 
     @Transactional
     public RoomEquipmentIssue save(RoomEquipmentIssue roomEquipmentIssue) {
         log.debug("Request to save RoomEquipmentIssue : {}", roomEquipmentIssue);
-        return roomEquipmentIssueRepository.save(roomEquipmentIssue);
+   //    Date date =  this.convertDateString(roomEquipmentIssue.getReportDate().toString(), DATE_FORMAT);
+     //  roomEquipmentIssue.setReportDate(date); 
+       return roomEquipmentIssueRepository.save(roomEquipmentIssue);
     }
+    private Date convertDateString(String dateStr, String format) {
+		Date dateValue = null;
+		try {
+			dateValue = DateUtils.parseDate(dateStr, format);
+		}
+		catch(ParseException e) {
+			log.error("Error parsing date value " + dateStr, e);
+			throw new RuntimeException(e);
+		}
+		return dateValue;
+	}
 
     /**
      * Get all the roomEquipmentIssues.

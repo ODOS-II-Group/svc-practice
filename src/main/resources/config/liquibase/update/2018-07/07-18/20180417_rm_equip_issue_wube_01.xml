@@ -16,6 +16,8 @@
 			create table odos_crrs_svc.rm_equip_issue (
 			id serial not null,
 			comment varchar(250) not null,
+			requestor_name varchar(250) not null,
+			report_date timestamp not null, 
 			status odos_crrs_svc.report_status,
 			conf_rm_id serial not null references odos_crrs_svc.conf_rm (conf_rm_id),
 			primary key (id)

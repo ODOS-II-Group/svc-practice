@@ -1,6 +1,7 @@
 package gov.dhs.uscis.odos.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -42,6 +43,13 @@ public class RoomEquipmentIssue implements Serializable {
     
     @Column(name = "conf_rm_id")
     private Long conferenceRoomId;
+    
+    @Column(name = "requestor_name")
+    private String requestorName;
+    
+    @Column(name = "report_date")
+    private Date reportDate;
+    
     
 
     public RoomEquipmentIssue(String comment, EquipmentStatus status, Long conferenceRoomId) {
@@ -91,6 +99,18 @@ public class RoomEquipmentIssue implements Serializable {
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
 
+	public String getRequestorName() {
+		return requestorName;
+	}
+	public void setRequestorName(String requestorName) {
+		this.requestorName = requestorName;
+	}
+	public Date getReportDate() {
+		return reportDate;
+	}
+	public void setReportDate(Date reportDate) {
+		this.reportDate = reportDate;
+	}
 	@Override
     public boolean equals(Object o) {
         if (this == o) {
