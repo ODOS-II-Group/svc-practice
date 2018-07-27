@@ -130,4 +130,10 @@ public class ConferenceRoomScheduleResource {
         conferenceRoomScheduleService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+    
+	@PostMapping("/conference-room-schedule/isAvailable")
+	@Timed
+	public boolean getConferenceRoomScheduleByDate(@RequestBody ConferenceRoomScheduleDTO conferenceRoomScheduleDTO) throws URISyntaxException {
+		return conferenceRoomScheduleService.isConfRoomAvaialbe(conferenceRoomScheduleDTO.getConferenceRoomId(), conferenceRoomScheduleDTO.getRoomScheduleStartTime());
+	}
 }

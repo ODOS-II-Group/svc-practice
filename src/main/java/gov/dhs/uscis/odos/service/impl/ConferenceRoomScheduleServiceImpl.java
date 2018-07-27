@@ -6,7 +6,10 @@ import gov.dhs.uscis.odos.repository.ConferenceRoomRepository;
 import gov.dhs.uscis.odos.repository.ConferenceRoomScheduleRepository;
 import gov.dhs.uscis.odos.service.dto.ConferenceRoomScheduleDTO;
 import gov.dhs.uscis.odos.service.mapper.ConferenceRoomScheduleMapper;
+import gov.dhs.uscis.odos.util.DateUtil;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -102,5 +105,19 @@ public class ConferenceRoomScheduleServiceImpl implements ConferenceRoomSchedule
 		return conferenceRoomScheduleRepository.findByRequestorId(requestorId)
 				.stream().map(conferenceRoomScheduleMapper::toDto)
 				.collect(Collectors.toCollection(LinkedList::new));
+	}
+	
+	@Override
+	public boolean isConfRoomAvaialbe(Long conferenceRoomId,
+			String roomScheduleStartTime) {
+		Date startDate = DateUtil.convertDateTimeString(roomScheduleStartTime);
+		Date endDate = startDate;
+		Calendar startDateCalendar = Calendar.getInstance();
+		startDateCalendar.setTime(startDate);
+		startDateCalendar.add(Calendar.MINUTE, -30);
+		startDate = startDateCalendar.getTime();
+		List<ConferenceRoomSchedule> confSchedule = conferenceRoomScheduleRepository.findAllByConferenceRoomIdAndDate(conferenceRoomId, startDate, endDate);
+		
+		return confSchedule.isEmpty();
 	}
 }
