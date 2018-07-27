@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<changeSet id="2018-04-17-pychou-01" author="Patrick Chou">
+		<sql>
+			CREATE TYPE odos_crrs_svc.report_status AS ENUM (
+			'REPORTED',
+			'ACCEPTED',
+			'DECLINED',
+			'FIXED');
+
+			id serial not null,
+			comment varchar(250) not null,
+			status odos_crrs_svc.report_status,
+			conf_rm_id serial not null references odos_crrs_svc.conf_rm (conf_rm_id),
+			primary key (id)
+			);
+		</sql>
+	</changeSet>
+</databaseChangeLog>
