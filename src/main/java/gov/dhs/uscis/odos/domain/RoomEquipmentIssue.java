@@ -7,6 +7,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import gov.dhs.uscis.odos.domain.enumeration.EquipmentStatus;
@@ -15,15 +17,14 @@ import gov.dhs.uscis.odos.domain.enumeration.EquipmentStatus;
  * A RoomEquipmentIssue.
  */
 @Entity
-@Table(name = "room_equipment_issue")
+@Table(name = "rm_equip_issue")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class RoomEquipmentIssue implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -33,6 +34,9 @@ public class RoomEquipmentIssue implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private EquipmentStatus status;
+    
+    @OneToMany(mappedBy = "roomEquipmentIssue", fetch = FetchType.LAZY ,cascade = CascadeType.ALL, orphanRemoval = true)
+   	private List<ConferenceRoom> ConferenceRoom = new ArrayList<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -68,9 +72,19 @@ public class RoomEquipmentIssue implements Serializable {
     public void setStatus(EquipmentStatus status) {
         this.status = status;
     }
+    
+    
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
-    @Override
+    public List<ConferenceRoom> getConferenceRoom() {
+		return ConferenceRoom;
+	}
+
+	public void setConferenceRoom(List<ConferenceRoom> conferenceRoom) {
+		ConferenceRoom = conferenceRoom;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

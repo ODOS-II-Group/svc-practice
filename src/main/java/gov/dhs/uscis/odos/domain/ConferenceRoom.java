@@ -52,6 +52,10 @@ public class ConferenceRoom implements Serializable {
 	@JoinColumn(name = "bldg_id")
 	private Building building;
 	
+	@ManyToOne(targetEntity = Building.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id")
+	private RoomEquipmentIssue roomEquipmentIssue;
+	
 	@OneToMany(mappedBy = "conferenceRoom", fetch = FetchType.LAZY ,cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ConferenceRoomSchedule> conferenceRoomSchedule = new ArrayList<>();
 	
@@ -120,6 +124,14 @@ public class ConferenceRoom implements Serializable {
 
 	public void setConferenceRoomEquipments(List<ConferenceRoomEquipment> conferenceRoomEquipments) {
 		this.conferenceRoomEquipments = conferenceRoomEquipments;
+	}
+
+	public RoomEquipmentIssue getRoomEquipmentIssue() {
+		return roomEquipmentIssue;
+	}
+
+	public void setRoomEquipmentIssue(RoomEquipmentIssue roomEquipmentIssue) {
+		this.roomEquipmentIssue = roomEquipmentIssue;
 	}
 
 	@Override
