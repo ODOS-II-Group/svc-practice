@@ -1,6 +1,7 @@
 package gov.dhs.uscis.odos.service.impl;
 
 import gov.dhs.uscis.odos.service.RoomEquipmentIssueService;
+import gov.dhs.uscis.odos.domain.ConferenceRoom;
 import gov.dhs.uscis.odos.domain.RoomEquipmentIssue;
 import gov.dhs.uscis.odos.repository.RoomEquipmentIssueRepository;
 import org.slf4j.Logger;
@@ -32,6 +33,7 @@ public class RoomEquipmentIssueServiceImpl implements RoomEquipmentIssueService 
      * @return the persisted entity
      */
     @Override
+    @Transactional
     public RoomEquipmentIssue save(RoomEquipmentIssue roomEquipmentIssue) {
         log.debug("Request to save RoomEquipmentIssue : {}", roomEquipmentIssue);
         return roomEquipmentIssueRepository.save(roomEquipmentIssue);

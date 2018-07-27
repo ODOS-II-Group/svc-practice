@@ -1,15 +1,20 @@
 package gov.dhs.uscis.odos.domain;
 
+import java.io.Serializable;
+import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 import gov.dhs.uscis.odos.domain.enumeration.EquipmentStatus;
 
@@ -35,15 +40,15 @@ public class RoomEquipmentIssue implements Serializable {
     @Column(name = "status")
     private EquipmentStatus status;
     
-    @OneToMany(mappedBy = "roomEquipmentIssue", fetch = FetchType.LAZY ,cascade = CascadeType.ALL, orphanRemoval = true)
-   	private List<ConferenceRoom> conferenceRoom;
+    @Column(name = "conf_rm_id")
+    private Long conferenceRoomId;
     
 
-    public RoomEquipmentIssue(String comment, EquipmentStatus status, List<ConferenceRoom> conferenceRoom) {
+    public RoomEquipmentIssue(String comment, EquipmentStatus status, Long conferenceRoomId) {
 		super();
 		this.comment = comment;
 		this.status = status;
-		this.conferenceRoom = conferenceRoom;
+		this.conferenceRoomId = conferenceRoomId;
 	}
     public RoomEquipmentIssue(){}
 
@@ -101,11 +106,12 @@ public class RoomEquipmentIssue implements Serializable {
         return Objects.equals(getId(), roomEquipmentIssue.getId());
     }
 
-    public List<ConferenceRoom> getConferenceRoom() {
-		return conferenceRoom;
+ 
+	public Long getConferenceRoomId() {
+		return conferenceRoomId;
 	}
-	public void setConferenceRoom(List<ConferenceRoom> conferenceRoom) {
-		this.conferenceRoom = conferenceRoom;
+	public void setConferenceRoomId(Long conferenceRoomId) {
+		this.conferenceRoomId = conferenceRoomId;
 	}
 	@Override
     public int hashCode() {
