@@ -13,6 +13,7 @@
 			'DECLINED',
 			'FIXED');
 
+			create table odos_crrs_svc.rm_equip_issue (
 			id serial not null,
 			comment varchar(250) not null,
 			status odos_crrs_svc.report_status,
