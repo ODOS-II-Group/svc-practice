@@ -28,7 +28,7 @@ public class RoomEquipmentIssue implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "jhi_comment", nullable = false)
+    @Column(name = "comment", nullable = false)
     private String comment;
 
     @Enumerated(EnumType.STRING)
@@ -36,9 +36,18 @@ public class RoomEquipmentIssue implements Serializable {
     private EquipmentStatus status;
     
     @OneToMany(mappedBy = "roomEquipmentIssue", fetch = FetchType.LAZY ,cascade = CascadeType.ALL, orphanRemoval = true)
-   	private List<ConferenceRoom> ConferenceRoom = new ArrayList<>();
+   	private List<ConferenceRoom> conferenceRoom;
+    
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    public RoomEquipmentIssue(String comment, EquipmentStatus status, List<ConferenceRoom> conferenceRoom) {
+		super();
+		this.comment = comment;
+		this.status = status;
+		this.conferenceRoom = conferenceRoom;
+	}
+    public RoomEquipmentIssue(){}
+
+	// jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -76,13 +85,6 @@ public class RoomEquipmentIssue implements Serializable {
     
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
-    public List<ConferenceRoom> getConferenceRoom() {
-		return ConferenceRoom;
-	}
-
-	public void setConferenceRoom(List<ConferenceRoom> conferenceRoom) {
-		ConferenceRoom = conferenceRoom;
-	}
 
 	@Override
     public boolean equals(Object o) {
@@ -99,7 +101,13 @@ public class RoomEquipmentIssue implements Serializable {
         return Objects.equals(getId(), roomEquipmentIssue.getId());
     }
 
-    @Override
+    public List<ConferenceRoom> getConferenceRoom() {
+		return conferenceRoom;
+	}
+	public void setConferenceRoom(List<ConferenceRoom> conferenceRoom) {
+		this.conferenceRoom = conferenceRoom;
+	}
+	@Override
     public int hashCode() {
         return Objects.hashCode(getId());
     }
