@@ -38,4 +38,11 @@ public interface ConferenceRoomService {
      * @param id the id of the entity
      */
     void delete(Long id);
+    
+    /**
+     * Update the "food space" conference room.
+     *
+     * @param conferenceRoomDTO
+     */
+    void updateFoodSpace(ConferenceRoomDTO conferenceRoomDTO);
 }

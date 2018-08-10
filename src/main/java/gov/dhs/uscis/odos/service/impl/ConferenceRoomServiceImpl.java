@@ -84,4 +84,12 @@ public class ConferenceRoomServiceImpl implements ConferenceRoomService {
         log.debug("Request to delete Conference Room : {}", id);
         conferenceRoomRepository.delete(id);
     }
+
+	@Override
+	public void updateFoodSpace(ConferenceRoomDTO conferenceRoomDTO) {
+		log.debug("Request to update Conference Room food space : {}", conferenceRoomDTO.getConferenceRoomId());
+        
+		conferenceRoomRepository.updateFoodSpace(conferenceRoomDTO.getFoodSpace(), conferenceRoomDTO.getConferenceRoomId());
+		
+	}
 }

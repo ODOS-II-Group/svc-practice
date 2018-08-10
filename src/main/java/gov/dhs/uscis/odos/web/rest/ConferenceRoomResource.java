@@ -75,7 +75,7 @@ public class ConferenceRoomResource {
      */
     @PutMapping("/conferenceroom")
     @Timed
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+  //  @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<ConferenceRoomDTO> updateConferenceRoom(@RequestBody ConferenceRoomDTO ConferenceRoomDTO) throws URISyntaxException {
         log.debug("REST request to update Conference Room : {}", ConferenceRoomDTO);
         if (ConferenceRoomDTO.getConferenceRoomId() == null) {
@@ -85,6 +85,29 @@ public class ConferenceRoomResource {
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, ConferenceRoomDTO.getConferenceRoomId().toString()))
             .body(result);
+    }
+    
+    /**
+     * PUT  /conferenceroom_space : Updates an existing conference rooms.
+     *
+     * @param ConferenceRoomDTO the ConferenceRoomDTO to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated ConferenceRoomDTO,
+     * or with status 400 (Bad Request) if the ConferenceRoomDTO is not valid,
+     * or with status 500 (Internal Server Error) if the ConferenceRoomDTO couldn't be updated
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PutMapping("/conferenceroom_space")
+    @Timed
+  //  @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<String> updateConferenceRoomFoddSpace(@RequestBody ConferenceRoomDTO ConferenceRoomDTO) throws URISyntaxException {
+        log.debug("REST request to update Conference Room : {}", ConferenceRoomDTO);
+        if (ConferenceRoomDTO.getConferenceRoomId() == null) {
+        	return ResponseEntity.badRequest().body("Conference Room Id is null");
+        }
+         conferenceRoomService.updateFoodSpace(ConferenceRoomDTO);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, ConferenceRoomDTO.getConferenceRoomId().toString()))
+            .body("Room has been Updated");
     }
 
     /**

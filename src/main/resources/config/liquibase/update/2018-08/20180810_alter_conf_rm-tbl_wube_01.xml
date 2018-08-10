@@ -6,7 +6,7 @@
 	<changeSet id="2018-08-10-wube-01" author="Wube">
 		<sql>
 			alter table odos_crrs_svc.conf_rm 
-			add column food_space varchar(3) ;
+			add column food_space varchar(4);
 		</sql>
 	</changeSet>
 </databaseChangeLog>

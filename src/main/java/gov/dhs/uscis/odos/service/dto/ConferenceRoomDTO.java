@@ -99,6 +99,8 @@ public class ConferenceRoomDTO implements Serializable {
 		this.buildingId = buildingId;
 	}
 
+	
+
 	public String getFoodSpace() {
 		return foodSpace;
 	}
