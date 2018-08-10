@@ -19,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 import gov.dhs.uscis.odos.domain.enums.ActiveIndicatorEnum;
 
 /**
@@ -47,6 +49,10 @@ public class ConferenceRoom implements Serializable {
 	@Column(name = "rm_active_ind")
 	@Enumerated(EnumType.STRING)
 	private ActiveIndicatorEnum activeIndicator;
+	
+	@Column(name = "food_space")
+	@Type(type="yes_no")
+	private String foodSpace;
 
 	@ManyToOne(targetEntity = Building.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "bldg_id")
@@ -145,6 +151,18 @@ public class ConferenceRoom implements Serializable {
 	public void setConferenceRoomEquipments(List<ConferenceRoomEquipment> conferenceRoomEquipments) {
 		this.conferenceRoomEquipments = conferenceRoomEquipments;
 	}
+	
+
+	public String getFoodSpace() {
+		return foodSpace;
+	}
+
+
+
+	public void setFoodSpace(String foodSpace) {
+		this.foodSpace = foodSpace;
+	}
+
 
 
 	@Override
