@@ -32,6 +32,8 @@
 	<include
 		file="config/liquibase/update/2018-07/07-18/20180417_rm_equip_issue_wube_01.xml"
 		relativeToChangelogFile="false" />
-
+	<include
+		file="config/liquibase/update/2018-08/20180810_alter_conf_rm-tbl_wube_01.xml"
+		relativeToChangelogFile="false" />
 
 </databaseChangeLog>
