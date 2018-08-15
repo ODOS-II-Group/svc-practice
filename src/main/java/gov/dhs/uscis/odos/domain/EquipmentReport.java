@@ -37,6 +37,10 @@ public class EquipmentReport implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "flag")
     private EquipmentStatusEnum flag;
+    
+    @ManyToOne(targetEntity = ConferenceRoomEquipment.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "conferenceRoomEquipId")
+    private ConferenceRoomEquipment conferenceRoomEquipment;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -76,8 +80,16 @@ public class EquipmentReport implements Serializable {
     public EquipmentStatusEnum getFlag() {
         return flag;
     }
+    
+    public ConferenceRoomEquipment getConferenceRoomEquipment() {
+		return conferenceRoomEquipment;
+	}
 
-    public EquipmentReport flag(EquipmentStatusEnum flag) {
+	public void setConferenceRoomEquipment(ConferenceRoomEquipment conferenceRoomEquipment) {
+		this.conferenceRoomEquipment = conferenceRoomEquipment;
+	}
+
+	public EquipmentReport flag(EquipmentStatusEnum flag) {
         this.flag = flag;
         return this;
     }
