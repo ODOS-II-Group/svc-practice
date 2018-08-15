@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<changeSet id="2018-08-15-wube-01" author="Patrick Chou">
+		<sql>
+		
+		CREATE TYPE odos_crrs_svc.equipm_report_status AS ENUM (
+			'ACCEPTED', 'REPORTED', 'DENIED', 'RESOLVED');
+			
+			create table odos_crrs_svc.equip_report (
+			id serial not null,
+			description varchar(250) not null,
+			resolution varchar(250),
+			flag odos_crrs_svc.equipm_report_status,
+			conf_rm_equip_id serial not null references odos_crrs_svc.conf_rm_equip (conf_rm_equip_id),
+			
+			primary key (id)
+			);
+			
+			 
+		</sql>
+	</changeSet>
+</databaseChangeLog>

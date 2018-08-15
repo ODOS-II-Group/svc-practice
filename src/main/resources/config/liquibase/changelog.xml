@@ -35,5 +35,10 @@
 	<include
 		file="config/liquibase/update/2018-08/20180810_alter_conf_rm-tbl_wube_01.xml"
 		relativeToChangelogFile="false" />
+			<include
+		file="config/liquibase/update/2018-08/20180417_create_equip_report_wube_01.xml"
+		relativeToChangelogFile="false" />
+		
+		
 
 </databaseChangeLog>
