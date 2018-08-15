@@ -29,6 +29,8 @@ public class ConferenceRoomDTO implements Serializable {
     
     private List<EquipmentDTO> equipments;
     
+    private List<EquipmentReportDTO> equipmentReports;
+    
     private List<ConferenceRoomScheduleDTO> schedule;
     
     private Long buildingId;
@@ -107,6 +109,15 @@ public class ConferenceRoomDTO implements Serializable {
 
 	public void setFoodSpace(String foodSpace) {
 		this.foodSpace = foodSpace;
+	}
+
+	
+	public List<EquipmentReportDTO> getEquipmentReports() {
+		return equipmentReports;
+	}
+
+	public void setEquipmentReports(List<EquipmentReportDTO> equipmentReports) {
+		this.equipmentReports = equipmentReports;
 	}
 
 	@Override
