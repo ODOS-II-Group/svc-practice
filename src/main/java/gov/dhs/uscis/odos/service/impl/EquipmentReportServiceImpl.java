@@ -1,14 +1,21 @@
 package gov.dhs.uscis.odos.service.impl;
 
-import gov.dhs.uscis.odos.service.EquipmentReportService;
-import gov.dhs.uscis.odos.domain.EquipmentReport;
-import gov.dhs.uscis.odos.repository.EquipmentReportRepository;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import gov.dhs.uscis.odos.domain.EquipmentReport;
+import gov.dhs.uscis.odos.repository.EquipmentReportRepository;
+import gov.dhs.uscis.odos.service.EquipmentReportService;
+import gov.dhs.uscis.odos.service.dto.EquipmentReportDTO;
+import gov.dhs.uscis.odos.service.mapper.EquipmentReportMapper;
 
 /**
  * Service Implementation for managing EquipmentReport.
@@ -20,6 +27,9 @@ public class EquipmentReportServiceImpl implements EquipmentReportService {
     private final Logger log = LoggerFactory.getLogger(EquipmentReportServiceImpl.class);
 
     private final EquipmentReportRepository equipmentReportRepository;
+    
+    @Inject
+    private EquipmentReportMapper equipmentReportMapper;
 
     public EquipmentReportServiceImpl(EquipmentReportRepository equipmentReportRepository) {
         this.equipmentReportRepository = equipmentReportRepository;
@@ -32,9 +42,10 @@ public class EquipmentReportServiceImpl implements EquipmentReportService {
      * @return the persisted entity
      */
     @Override
-    public EquipmentReport save(EquipmentReport equipmentReport) {
-        log.debug("Request to save EquipmentReport : {}", equipmentReport);
-        return equipmentReportRepository.save(equipmentReport);
+    public EquipmentReportDTO save(EquipmentReportDTO equipmentReportDTO) {
+        log.debug("Request to save EquipmentReport : {}", equipmentReportDTO);
+        EquipmentReport equipmentReport = equipmentReportRepository.save(equipmentReportMapper.toEntity(equipmentReportDTO));
+        return equipmentReportMapper.toDto(equipmentReport);
     }
 
     /**
@@ -44,9 +55,11 @@ public class EquipmentReportServiceImpl implements EquipmentReportService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<EquipmentReport> findAll() {
+    public List<EquipmentReportDTO> findAll() {
         log.debug("Request to get all EquipmentReports");
-        return equipmentReportRepository.findAll();
+        return equipmentReportRepository.findAll().stream()
+        		.map(equipmentReportMapper::toDto)
+        		.collect(Collectors.toCollection(LinkedList::new));
     }
 
     /**
@@ -57,9 +70,10 @@ public class EquipmentReportServiceImpl implements EquipmentReportService {
      */
     @Override
     @Transactional(readOnly = true)
-    public EquipmentReport findOne(Long id) {
+    public EquipmentReportDTO findOne(Long id) {
         log.debug("Request to get EquipmentReport : {}", id);
-        return equipmentReportRepository.findOne(id);
+        EquipmentReport equipmentReport = equipmentReportRepository.findOne(id);
+        return equipmentReportMapper.toDto(equipmentReport);
     }
 
     /**
