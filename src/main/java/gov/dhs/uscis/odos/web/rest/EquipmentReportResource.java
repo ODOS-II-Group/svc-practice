@@ -1,22 +1,31 @@
 package gov.dhs.uscis.odos.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import gov.dhs.uscis.odos.domain.EquipmentReport;
-import gov.dhs.uscis.odos.service.EquipmentReportService;
-import gov.dhs.uscis.odos.web.rest.errors.BadRequestAlertException;
-import gov.dhs.uscis.odos.web.rest.util.HeaderUtil;
-import io.github.jhipster.web.util.ResponseUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.net.URI;
-import java.net.URISyntaxException;
+import com.codahale.metrics.annotation.Timed;
 
-import java.util.List;
-import java.util.Optional;
+import gov.dhs.uscis.odos.service.EquipmentReportService;
+import gov.dhs.uscis.odos.service.dto.EquipmentReportDTO;
+import gov.dhs.uscis.odos.web.rest.errors.BadRequestAlertException;
+import gov.dhs.uscis.odos.web.rest.util.HeaderUtil;
+import io.github.jhipster.web.util.ResponseUtil;
 
 /**
  * REST controller for managing EquipmentReport.
@@ -44,12 +53,12 @@ public class EquipmentReportResource {
      */
     @PostMapping("/equipment-reports")
     @Timed
-    public ResponseEntity<EquipmentReport> createEquipmentReport(@Valid @RequestBody EquipmentReport equipmentReport) throws URISyntaxException {
-        log.debug("REST request to save EquipmentReport : {}", equipmentReport);
-        if (equipmentReport.getId() != null) {
+    public ResponseEntity<EquipmentReportDTO> createEquipmentReport(@Valid @RequestBody EquipmentReportDTO equipmentReportDTO) throws URISyntaxException {
+        log.debug("REST request to save EquipmentReport : {}", equipmentReportDTO);
+        if (equipmentReportDTO.getId() != null) {
             throw new BadRequestAlertException("A new equipmentReport cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        EquipmentReport result = equipmentReportService.save(equipmentReport);
+        EquipmentReportDTO result = equipmentReportService.save(equipmentReportDTO);
         return ResponseEntity.created(new URI("/api/equipment-reports/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -66,14 +75,14 @@ public class EquipmentReportResource {
      */
     @PutMapping("/equipment-reports")
     @Timed
-    public ResponseEntity<EquipmentReport> updateEquipmentReport(@Valid @RequestBody EquipmentReport equipmentReport) throws URISyntaxException {
-        log.debug("REST request to update EquipmentReport : {}", equipmentReport);
-        if (equipmentReport.getId() == null) {
-            return createEquipmentReport(equipmentReport);
+    public ResponseEntity<EquipmentReportDTO> updateEquipmentReport(@Valid @RequestBody EquipmentReportDTO equipmentReportDTO) throws URISyntaxException {
+        log.debug("REST request to update EquipmentReport : {}", equipmentReportDTO);
+        if (equipmentReportDTO.getId() == null) {
+            return createEquipmentReport(equipmentReportDTO);
         }
-        EquipmentReport result = equipmentReportService.save(equipmentReport);
+        EquipmentReportDTO result = equipmentReportService.save(equipmentReportDTO);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, equipmentReport.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, equipmentReportDTO.getId().toString()))
             .body(result);
     }
 
@@ -84,7 +93,7 @@ public class EquipmentReportResource {
      */
     @GetMapping("/equipment-reports")
     @Timed
-    public List<EquipmentReport> getAllEquipmentReports() {
+    public List<EquipmentReportDTO> getAllEquipmentReports() {
         log.debug("REST request to get all EquipmentReports");
         return equipmentReportService.findAll();
         }
@@ -97,10 +106,10 @@ public class EquipmentReportResource {
      */
     @GetMapping("/equipment-reports/{id}")
     @Timed
-    public ResponseEntity<EquipmentReport> getEquipmentReport(@PathVariable Long id) {
+    public ResponseEntity<EquipmentReportDTO> getEquipmentReport(@PathVariable Long id) {
         log.debug("REST request to get EquipmentReport : {}", id);
-        EquipmentReport equipmentReport = equipmentReportService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(equipmentReport));
+        EquipmentReportDTO equipmentReportDTO = equipmentReportService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(equipmentReportDTO));
     }
 
     /**

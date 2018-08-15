@@ -1,7 +1,8 @@
 package gov.dhs.uscis.odos.service;
 
-import gov.dhs.uscis.odos.domain.EquipmentReport;
 import java.util.List;
+
+import gov.dhs.uscis.odos.service.dto.EquipmentReportDTO;
 
 /**
  * Service Interface for managing EquipmentReport.
@@ -14,14 +15,14 @@ public interface EquipmentReportService {
      * @param equipmentReport the entity to save
      * @return the persisted entity
      */
-    EquipmentReport save(EquipmentReport equipmentReport);
+    EquipmentReportDTO save(EquipmentReportDTO equipmentReportDTO);
 
     /**
      * Get all the equipmentReports.
      *
      * @return the list of entities
      */
-    List<EquipmentReport> findAll();
+    List<EquipmentReportDTO> findAll();
 
     /**
      * Get the "id" equipmentReport.
@@ -29,7 +30,7 @@ public interface EquipmentReportService {
      * @param id the id of the entity
      * @return the entity
      */
-    EquipmentReport findOne(Long id);
+    EquipmentReportDTO findOne(Long id);
 
     /**
      * Delete the "id" equipmentReport.
