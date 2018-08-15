@@ -27,8 +27,8 @@ public class EquipmentReport implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "discription", nullable = false)
-    private String discription;
+    @Column(name = "description", nullable = false)
+    private String description;
 
     @NotNull
     @Column(name = "resolution", nullable = false)
@@ -47,17 +47,17 @@ public class EquipmentReport implements Serializable {
         this.id = id;
     }
 
-    public String getDiscription() {
-        return discription;
+    public String getDescription() {
+        return description;
     }
 
-    public EquipmentReport discription(String discription) {
-        this.discription = discription;
+    public EquipmentReport description(String description) {
+        this.description = description;
         return this;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getResolution() {
@@ -111,7 +111,7 @@ public class EquipmentReport implements Serializable {
     public String toString() {
         return "EquipmentReport{" +
             "id=" + getId() +
-            ", discription='" + getDiscription() + "'" +
+            ", description='" + getDescription() + "'" +
             ", resolution='" + getResolution() + "'" +
             ", flag='" + getFlag() + "'" +
             "}";
