@@ -90,7 +90,7 @@ public class EquipmentReportResourceIntTest {
      */
     public static EquipmentReport createEntity(EntityManager em) {
         EquipmentReport equipmentReport = new EquipmentReport()
-            .discription(DEFAULT_DISCRIPTION)
+            .description(DEFAULT_DISCRIPTION)
             .resolution(DEFAULT_RESOLUTION)
             .flag(DEFAULT_FLAG);
         return equipmentReport;
@@ -116,7 +116,7 @@ public class EquipmentReportResourceIntTest {
         List<EquipmentReport> equipmentReportList = equipmentReportRepository.findAll();
         assertThat(equipmentReportList).hasSize(databaseSizeBeforeCreate + 1);
         EquipmentReport testEquipmentReport = equipmentReportList.get(equipmentReportList.size() - 1);
-        assertThat(testEquipmentReport.getDiscription()).isEqualTo(DEFAULT_DISCRIPTION);
+        assertThat(testEquipmentReport.getDescription()).isEqualTo(DEFAULT_DISCRIPTION);
         assertThat(testEquipmentReport.getResolution()).isEqualTo(DEFAULT_RESOLUTION);
         assertThat(testEquipmentReport.getFlag()).isEqualTo(DEFAULT_FLAG);
     }
@@ -142,10 +142,10 @@ public class EquipmentReportResourceIntTest {
 
     @Test
     @Transactional
-    public void checkDiscriptionIsRequired() throws Exception {
+    public void checkdescriptionIsRequired() throws Exception {
         int databaseSizeBeforeTest = equipmentReportRepository.findAll().size();
         // set the field null
-        equipmentReport.setDiscription(null);
+        equipmentReport.setDescription(null);
 
         // Create the EquipmentReport, which fails.
 
@@ -187,7 +187,7 @@ public class EquipmentReportResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(equipmentReport.getId().intValue())))
-            .andExpect(jsonPath("$.[*].discription").value(hasItem(DEFAULT_DISCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DISCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].resolution").value(hasItem(DEFAULT_RESOLUTION.toString())))
             .andExpect(jsonPath("$.[*].flag").value(hasItem(DEFAULT_FLAG.toString())));
     }
@@ -203,7 +203,7 @@ public class EquipmentReportResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(equipmentReport.getId().intValue()))
-            .andExpect(jsonPath("$.discription").value(DEFAULT_DISCRIPTION.toString()))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DISCRIPTION.toString()))
             .andExpect(jsonPath("$.resolution").value(DEFAULT_RESOLUTION.toString()))
             .andExpect(jsonPath("$.flag").value(DEFAULT_FLAG.toString()));
     }
@@ -229,7 +229,7 @@ public class EquipmentReportResourceIntTest {
         // Disconnect from session so that the updates on updatedEquipmentReport are not directly saved in db
         em.detach(updatedEquipmentReport);
         updatedEquipmentReport
-            .discription(UPDATED_DISCRIPTION)
+            .description(UPDATED_DISCRIPTION)
             .resolution(UPDATED_RESOLUTION)
             .flag(UPDATED_FLAG);
 
@@ -242,7 +242,7 @@ public class EquipmentReportResourceIntTest {
         List<EquipmentReport> equipmentReportList = equipmentReportRepository.findAll();
         assertThat(equipmentReportList).hasSize(databaseSizeBeforeUpdate);
         EquipmentReport testEquipmentReport = equipmentReportList.get(equipmentReportList.size() - 1);
-        assertThat(testEquipmentReport.getDiscription()).isEqualTo(UPDATED_DISCRIPTION);
+        assertThat(testEquipmentReport.getDescription()).isEqualTo(UPDATED_DISCRIPTION);
         assertThat(testEquipmentReport.getResolution()).isEqualTo(UPDATED_RESOLUTION);
         assertThat(testEquipmentReport.getFlag()).isEqualTo(UPDATED_FLAG);
     }
