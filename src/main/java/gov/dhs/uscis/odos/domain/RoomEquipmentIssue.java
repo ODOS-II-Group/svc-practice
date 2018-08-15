@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import gov.dhs.uscis.odos.domain.enumeration.EquipmentStatus;
+import gov.dhs.uscis.odos.domain.enumeration.EquipmentStatusEnum;
 
 /**
  * A RoomEquipmentIssue.
@@ -39,7 +39,7 @@ public class RoomEquipmentIssue implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private EquipmentStatus status;
+    private EquipmentStatusEnum status;
     
     @Column(name = "conf_rm_id")
     private Long conferenceRoomId;
@@ -52,7 +52,7 @@ public class RoomEquipmentIssue implements Serializable {
     
     
 
-    public RoomEquipmentIssue(String comment, EquipmentStatus status, Long conferenceRoomId) {
+    public RoomEquipmentIssue(String comment, EquipmentStatusEnum status, Long conferenceRoomId) {
 		super();
 		this.comment = comment;
 		this.status = status;
@@ -82,16 +82,16 @@ public class RoomEquipmentIssue implements Serializable {
         this.comment = comment;
     }
 
-    public EquipmentStatus getStatus() {
+    public EquipmentStatusEnum getStatus() {
         return status;
     }
 
-    public RoomEquipmentIssue status(EquipmentStatus status) {
+    public RoomEquipmentIssue status(EquipmentStatusEnum status) {
         this.status = status;
         return this;
     }
 
-    public void setStatus(EquipmentStatus status) {
+    public void setStatus(EquipmentStatusEnum status) {
         this.status = status;
     }
     
