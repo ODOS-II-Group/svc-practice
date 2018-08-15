@@ -28,7 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import gov.dhs.uscis.odos.base.test.BaseIntegrationTest;
 import gov.dhs.uscis.odos.domain.RoomEquipmentIssue;
-import gov.dhs.uscis.odos.domain.enumeration.EquipmentStatus;
+import gov.dhs.uscis.odos.domain.enumeration.EquipmentStatusEnum;
 import gov.dhs.uscis.odos.repository.RoomEquipmentIssueRepository;
 import gov.dhs.uscis.odos.service.RoomEquipmentIssueService;
 import gov.dhs.uscis.odos.web.rest.errors.ExceptionTranslator;
@@ -42,8 +42,8 @@ public class RoomEquipmentIssueResourceIntTest extends BaseIntegrationTest {
     private static final String DEFAULT_COMMENT = "AAAAAAAAAA";
     private static final String UPDATED_COMMENT = "BBBBBBBBBB";
 
-    private static final EquipmentStatus DEFAULT_STATUS = EquipmentStatus.REPORTED;
-    private static final EquipmentStatus UPDATED_STATUS = EquipmentStatus.ACCEPTED;
+    private static final EquipmentStatusEnum DEFAULT_STATUS = EquipmentStatusEnum.REPORTED;
+    private static final EquipmentStatusEnum UPDATED_STATUS = EquipmentStatusEnum.ACCEPTED;
 
     @Autowired
     private RoomEquipmentIssueRepository roomEquipmentIssueRepository;
