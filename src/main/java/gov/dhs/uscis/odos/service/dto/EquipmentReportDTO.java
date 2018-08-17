@@ -20,6 +20,8 @@ public class EquipmentReportDTO implements Serializable {
     private String resolution;
     
     private String flag;
+    
+    private Long conferenceRoomEquipmentId;
 
 	public Long getId() {
 		return id;
@@ -58,6 +60,13 @@ public class EquipmentReportDTO implements Serializable {
 		return "EquipmentReportDTO [id=" + id + ", description=" + description + ", resolution=" + resolution
 				+ ", flag=" + flag + "]";
 	}
-    
+
+	public Long getConferenceRoomEquipmentId() {
+		return conferenceRoomEquipmentId;
+	}
+
+	public void setConferenceRoomEquipmentId(Long conferenceRoomEquipmentId) {
+		this.conferenceRoomEquipmentId = conferenceRoomEquipmentId;
+	}
     
 }
