@@ -40,10 +40,18 @@ spring:
         serialization.indent_output: true
 
     mail:
-        host: localhost
-        port: 25
-        username:
-        password:
+        host: email-smtp.us-east-1.amazonaws.com
+        port: 465
+        username: AKIAIA2OKP5XVUJPBC4A
+        password: As2l0uN0hMJagdNlKljWACW8Ufv+tDrRsAhT89iBYy4v
+        protocol: smtps
+        debug: true
+        properties.mail.smtp:
+            starttls.enable: true
+            starttls.required: true
+            ssl.enable: true
+        properties.mail.smtps:
+            auth: true
     messages:
         cache-seconds: 1
     thymeleaf:
