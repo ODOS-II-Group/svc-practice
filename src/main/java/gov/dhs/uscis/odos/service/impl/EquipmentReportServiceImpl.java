@@ -55,25 +55,11 @@ public class EquipmentReportServiceImpl implements EquipmentReportService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<EquipmentReportDTO> findAll() {
+    public List<EquipmentReportDTO> findAllById(Long id) {
         log.debug("Request to get all EquipmentReports");
-        return equipmentReportRepository.findAll().stream()
+        return equipmentReportRepository.findAllByConfRoomId(id).stream()
         		.map(equipmentReportMapper::toDto)
         		.collect(Collectors.toCollection(LinkedList::new));
-    }
-
-    /**
-     * Get one equipmentReport by id.
-     *
-     * @param id the id of the entity
-     * @return the entity
-     */
-    @Override
-    @Transactional(readOnly = true)
-    public EquipmentReportDTO findOne(Long id) {
-        log.debug("Request to get EquipmentReport : {}", id);
-        EquipmentReport equipmentReport = equipmentReportRepository.findOne(id);
-        return equipmentReportMapper.toDto(equipmentReport);
     }
 
     /**

@@ -12,9 +12,11 @@ import org.dozer.Mapper;
 import gov.dhs.uscis.odos.domain.ConferenceRoom;
 import gov.dhs.uscis.odos.domain.ConferenceRoomEquipment;
 import gov.dhs.uscis.odos.domain.ConferenceRoomSchedule;
+import gov.dhs.uscis.odos.service.EquipmentReportService;
 import gov.dhs.uscis.odos.service.dto.ConferenceRoomDTO;
 import gov.dhs.uscis.odos.service.dto.ConferenceRoomScheduleDTO;
 import gov.dhs.uscis.odos.service.dto.EquipmentDTO;
+import gov.dhs.uscis.odos.service.dto.EquipmentReportDTO;
 
 /**
  * Mapper for the entity ConferenceRoom and its DTO ConferenceRoomDTO.
@@ -27,6 +29,9 @@ public class ConferenceRoomMapper implements EntityMapper<ConferenceRoomDTO, Con
 	
 	@Inject
 	private ConferenceRoomScheduleMapper crsMapper;
+	
+	@Inject
+	private EquipmentReportService equipmentReportService;
 
 	@Override
 	public ConferenceRoom toEntity(ConferenceRoomDTO dto) {	
@@ -49,6 +54,9 @@ public class ConferenceRoomMapper implements EntityMapper<ConferenceRoomDTO, Con
 		}
 		conferenceRoomDTO.setSchedule(scheduleDTO);
 		conferenceRoomDTO.setBuildingId(entity.getBuilding().getBuildingId());
+		
+		List<EquipmentReportDTO> equipmentReports = equipmentReportService.findAllById(entity.getConferenceRoomId());
+		conferenceRoomDTO.setEquipmentReports(equipmentReports);
 		
 		return conferenceRoomDTO;
 	}

@@ -87,18 +87,6 @@ public class EquipmentReportResource {
     }
 
     /**
-     * GET  /equipment-reports : get all the equipmentReports.
-     *
-     * @return the ResponseEntity with status 200 (OK) and the list of equipmentReports in body
-     */
-    @GetMapping("/equipment-reports")
-    @Timed
-    public List<EquipmentReportDTO> getAllEquipmentReports() {
-        log.debug("REST request to get all EquipmentReports");
-        return equipmentReportService.findAll();
-        }
-
-    /**
      * GET  /equipment-reports/:id : get the "id" equipmentReport.
      *
      * @param id the id of the equipmentReport to retrieve
@@ -106,10 +94,9 @@ public class EquipmentReportResource {
      */
     @GetMapping("/equipment-reports/{id}")
     @Timed
-    public ResponseEntity<EquipmentReportDTO> getEquipmentReport(@PathVariable Long id) {
+    public List<EquipmentReportDTO> getEquipmentReport(@PathVariable Long id) {
         log.debug("REST request to get EquipmentReport : {}", id);
-        EquipmentReportDTO equipmentReportDTO = equipmentReportService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(equipmentReportDTO));
+        return equipmentReportService.findAllById(id);
     }
 
     /**

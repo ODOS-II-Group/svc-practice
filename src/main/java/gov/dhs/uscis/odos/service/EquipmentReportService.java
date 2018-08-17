@@ -22,15 +22,7 @@ public interface EquipmentReportService {
      *
      * @return the list of entities
      */
-    List<EquipmentReportDTO> findAll();
-
-    /**
-     * Get the "id" equipmentReport.
-     *
-     * @param id the id of the entity
-     * @return the entity
-     */
-    EquipmentReportDTO findOne(Long id);
+    List<EquipmentReportDTO> findAllById(Long id);
 
     /**
      * Delete the "id" equipmentReport.

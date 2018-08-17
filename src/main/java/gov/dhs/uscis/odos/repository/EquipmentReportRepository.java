@@ -1,9 +1,13 @@
 package gov.dhs.uscis.odos.repository;
 
-import gov.dhs.uscis.odos.domain.EquipmentReport;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import org.springframework.data.jpa.repository.*;
+import gov.dhs.uscis.odos.domain.EquipmentReport;
 
 
 /**
@@ -12,5 +16,10 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface EquipmentReportRepository extends JpaRepository<EquipmentReport, Long> {
+	
+	@Query("SELECT er FROM EquipmentReport er inner join er.conferenceRoomEquipment.conferenceRoom cf " +
+			"where cf.conferenceRoomId = :conferenceRoomId")
+	public List<EquipmentReport> findAllByConfRoomId(
+			@Param("conferenceRoomId") Long conferenceRoomId);
 
 }
