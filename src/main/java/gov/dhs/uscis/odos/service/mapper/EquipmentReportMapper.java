@@ -9,6 +9,7 @@ import javax.inject.Named;
 import org.dozer.Mapper;
 
 import gov.dhs.uscis.odos.domain.EquipmentReport;
+import gov.dhs.uscis.odos.repository.ConferenceRoomEquipmentRepository;
 import gov.dhs.uscis.odos.service.dto.EquipmentReportDTO;
 
 /**
@@ -19,15 +20,22 @@ public class EquipmentReportMapper implements EntityMapper<EquipmentReportDTO, E
 
 	@Inject
 	private Mapper mapper;
+	
+	@Inject
+	private ConferenceRoomEquipmentRepository conferenceRoomEquipRepository;
 
 	@Override
 	public EquipmentReport toEntity(EquipmentReportDTO dto) {	
-		return mapper.map(dto, EquipmentReport.class);
+		EquipmentReport equipmentReport = mapper.map(dto, EquipmentReport.class);
+		equipmentReport.setConferenceRoomEquipment(conferenceRoomEquipRepository.findOne(dto.getConferenceRoomEquipmentId()));
+		return equipmentReport;
 	}
 
 	@Override
 	public EquipmentReportDTO toDto(EquipmentReport entity) {		
-		return mapper.map(entity, EquipmentReportDTO.class);
+		EquipmentReportDTO equipmentReportDTO = mapper.map(entity, EquipmentReportDTO.class);
+		equipmentReportDTO.setConferenceRoomEquipmentId(entity.getConferenceRoomEquipment().getConferenceRoomEquipId());
+		return equipmentReportDTO;
 	}
 
 	@Override
