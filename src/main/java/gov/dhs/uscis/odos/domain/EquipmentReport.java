@@ -15,7 +15,7 @@ import gov.dhs.uscis.odos.domain.enumeration.EquipmentStatusEnum;
  * A EquipmentReport.
  */
 @Entity
-@Table(name = "equipment_report")
+@Table(name = "equip_report")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class EquipmentReport implements Serializable {
 
@@ -38,8 +38,8 @@ public class EquipmentReport implements Serializable {
     @Column(name = "flag")
     private EquipmentStatusEnum flag;
     
-    @ManyToOne(targetEntity = ConferenceRoomEquipment.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "conferenceRoomEquipId")
+    @OneToOne(targetEntity = ConferenceRoomEquipment.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "conf_rm_equip_id")
     private ConferenceRoomEquipment conferenceRoomEquipment;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
