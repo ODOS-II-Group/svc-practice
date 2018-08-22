@@ -10,10 +10,19 @@ import java.util.Objects;
  */
 public class RoomcolumnvalueDTO implements Serializable {
 
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8583132390072375297L;
+
+	private Long id;
 
     @NotNull
     private String columnvalue;
+    
+    private String columnName;
+    
+    private Long confRoomId;
 
     public Long getId() {
         return id;
@@ -31,7 +40,23 @@ public class RoomcolumnvalueDTO implements Serializable {
         this.columnvalue = columnvalue;
     }
 
-    @Override
+    public String getColumnName() {
+		return columnName;
+	}
+
+	public void setColumnName(String columnName) {
+		this.columnName = columnName;
+	}
+
+	public Long getConfRoomId() {
+		return confRoomId;
+	}
+
+	public void setConfRoomId(Long confRoomId) {
+		this.confRoomId = confRoomId;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -53,10 +78,8 @@ public class RoomcolumnvalueDTO implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return "RoomcolumnvalueDTO{" +
-            "id=" + getId() +
-            ", columnvalue='" + getColumnvalue() + "'" +
-            "}";
-    }
+	public String toString() {
+		return "RoomcolumnvalueDTO [id=" + id + ", columnvalue=" + columnvalue + ", columnName=" + columnName
+				+ ", confRoomId=" + confRoomId + "]";
+	}
 }

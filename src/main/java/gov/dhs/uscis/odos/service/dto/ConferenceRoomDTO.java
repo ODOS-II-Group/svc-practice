@@ -31,6 +31,8 @@ public class ConferenceRoomDTO implements Serializable {
     
     private List<ConferenceRoomScheduleDTO> schedule;
     
+    private List<RoomcolumnvalueDTO> roomColumnValues;
+    
     private Long buildingId;
 
     public Long getConferenceRoomId() {
@@ -95,6 +97,14 @@ public class ConferenceRoomDTO implements Serializable {
 
 	public void setBuildingId(Long buildingId) {
 		this.buildingId = buildingId;
+	}
+
+	public List<RoomcolumnvalueDTO> getRoomColumnValues() {
+		return roomColumnValues;
+	}
+
+	public void setRoomColumnValues(List<RoomcolumnvalueDTO> roomColumnValues) {
+		this.roomColumnValues = roomColumnValues;
 	}
 
 	@Override
