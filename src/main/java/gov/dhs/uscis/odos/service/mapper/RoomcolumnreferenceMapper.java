@@ -1,24 +1,53 @@
 package gov.dhs.uscis.odos.service.mapper;
 
-import gov.dhs.uscis.odos.domain.*;
-import gov.dhs.uscis.odos.service.dto.RoomcolumnreferenceDTO;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.mapstruct.*;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.dozer.Mapper;
+
+import gov.dhs.uscis.odos.domain.Roomcolumnreference;
+import gov.dhs.uscis.odos.service.dto.RoomcolumnreferenceDTO;
 
 /**
  * Mapper for the entity Roomcolumnreference and its DTO RoomcolumnreferenceDTO.
  */
-@Mapper(componentModel = "spring", uses = {})
-public interface RoomcolumnreferenceMapper extends EntityMapper<RoomcolumnreferenceDTO, Roomcolumnreference> {
+@Named
+public class RoomcolumnreferenceMapper implements EntityMapper<RoomcolumnreferenceDTO, Roomcolumnreference> {
 
+	@Inject
+	private Mapper mapper;
 
+	@Override
+	public Roomcolumnreference toEntity(RoomcolumnreferenceDTO dto) {
+		return mapper.map(dto, Roomcolumnreference.class);
+	}
 
-    default Roomcolumnreference fromId(Long id) {
-        if (id == null) {
-            return null;
-        }
-        Roomcolumnreference roomcolumnreference = new Roomcolumnreference();
-        roomcolumnreference.setId(id);
-        return roomcolumnreference;
-    }
+	@Override
+	public RoomcolumnreferenceDTO toDto(Roomcolumnreference entity) {
+		RoomcolumnreferenceDTO roomcolumnreferenceDTO = mapper.map(entity, RoomcolumnreferenceDTO.class);
+		return roomcolumnreferenceDTO;
+	}
+
+	@Override
+	public List<Roomcolumnreference> toEntity(List<RoomcolumnreferenceDTO> dtoList) {
+		List<Roomcolumnreference> roomcolumnreferences = new ArrayList<>();
+		for (RoomcolumnreferenceDTO roomcolumnreferenceDTO : dtoList) {
+			roomcolumnreferences.add(mapper.map(roomcolumnreferenceDTO, Roomcolumnreference.class));
+		}
+		return roomcolumnreferences;
+	}
+
+	@Override
+	public List<RoomcolumnreferenceDTO> toDto(List<Roomcolumnreference> entityList) {
+		List<RoomcolumnreferenceDTO> roomcolumnreferenceDTO = new ArrayList<>();
+		for (Roomcolumnreference roomcolumnreference : entityList) {
+			roomcolumnreferenceDTO.add(mapper.map(roomcolumnreference, RoomcolumnreferenceDTO.class));
+		}
+		return roomcolumnreferenceDTO;
+	}
+	
+	
 }
