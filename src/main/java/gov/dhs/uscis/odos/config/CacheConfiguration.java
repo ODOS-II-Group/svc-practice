@@ -41,6 +41,7 @@ public class CacheConfiguration {
             cm.createCache(gov.dhs.uscis.odos.domain.Building.class.getName(), jcacheConfiguration);
             cm.createCache(gov.dhs.uscis.odos.domain.ConferenceRoomSchedule.class.getName(), jcacheConfiguration);
             cm.createCache(gov.dhs.uscis.odos.domain.Roomcolumnreference.class.getName(), jcacheConfiguration);
+            cm.createCache(gov.dhs.uscis.odos.domain.Roomcolumnvalue.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }
