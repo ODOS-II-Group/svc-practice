@@ -27,6 +27,14 @@ public class Roomcolumnvalue implements Serializable {
     @NotNull
     @Column(name = "columnvalue", nullable = false)
     private String columnvalue;
+    
+    @ManyToOne(targetEntity = Roomcolumnreference.class)
+    @JoinColumn(name = "room_ref_id")
+    private Roomcolumnreference roomcolumnreference;
+    
+    @ManyToOne(targetEntity = ConferenceRoom.class)
+    @JoinColumn(name = "conf_room_id")
+    private ConferenceRoom conferenceRoom;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -51,6 +59,23 @@ public class Roomcolumnvalue implements Serializable {
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
+
+    public Roomcolumnreference getRoomcolumnreference() {
+		return roomcolumnreference;
+	}
+
+	public void setRoomcolumnreference(Roomcolumnreference roomcolumnreference) {
+		this.roomcolumnreference = roomcolumnreference;
+	}
+
+	public ConferenceRoom getConferenceRoom() {
+		return conferenceRoom;
+	}
+
+	public void setConferenceRoom(ConferenceRoom conferenceRoom) {
+		this.conferenceRoom = conferenceRoom;
+	}
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -66,16 +91,15 @@ public class Roomcolumnvalue implements Serializable {
         return Objects.equals(getId(), roomcolumnvalue.getId());
     }
 
-    @Override
+	@Override
     public int hashCode() {
         return Objects.hashCode(getId());
     }
 
-    @Override
-    public String toString() {
-        return "Roomcolumnvalue{" +
-            "id=" + getId() +
-            ", columnvalue='" + getColumnvalue() + "'" +
-            "}";
-    }
+	@Override
+	public String toString() {
+		return "Roomcolumnvalue [id=" + id + ", columnvalue=" + columnvalue + ", roomcolumnreference="
+				+ roomcolumnreference + ", conferenceRoom=" + conferenceRoom + "]";
+	}
+
 }
