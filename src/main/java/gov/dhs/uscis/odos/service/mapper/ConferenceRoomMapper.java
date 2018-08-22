@@ -12,9 +12,11 @@ import org.dozer.Mapper;
 import gov.dhs.uscis.odos.domain.ConferenceRoom;
 import gov.dhs.uscis.odos.domain.ConferenceRoomEquipment;
 import gov.dhs.uscis.odos.domain.ConferenceRoomSchedule;
+import gov.dhs.uscis.odos.domain.Roomcolumnvalue;
 import gov.dhs.uscis.odos.service.dto.ConferenceRoomDTO;
 import gov.dhs.uscis.odos.service.dto.ConferenceRoomScheduleDTO;
 import gov.dhs.uscis.odos.service.dto.EquipmentDTO;
+import gov.dhs.uscis.odos.service.dto.RoomcolumnvalueDTO;
 
 /**
  * Mapper for the entity ConferenceRoom and its DTO ConferenceRoomDTO.
@@ -27,6 +29,9 @@ public class ConferenceRoomMapper implements EntityMapper<ConferenceRoomDTO, Con
 	
 	@Inject
 	private ConferenceRoomScheduleMapper crsMapper;
+	
+	@Inject
+	private RoomcolumnvalueMapper rcvMapper;
 
 	@Override
 	public ConferenceRoom toEntity(ConferenceRoomDTO dto) {	
@@ -48,7 +53,14 @@ public class ConferenceRoomMapper implements EntityMapper<ConferenceRoomDTO, Con
 			scheduleDTO.add(crsMapper.toDto(schedule));
 		}
 		conferenceRoomDTO.setSchedule(scheduleDTO);
+		
 		conferenceRoomDTO.setBuildingId(entity.getBuilding().getBuildingId());
+		
+		List<RoomcolumnvalueDTO> roomColumnValues = new ArrayList<RoomcolumnvalueDTO>();
+		for (Roomcolumnvalue value : entity.getRoomColumnValues()) {
+			roomColumnValues.add(rcvMapper.toDto(value));
+		}
+		conferenceRoomDTO.setRoomColumnValues(roomColumnValues);
 		
 		return conferenceRoomDTO;
 	}
